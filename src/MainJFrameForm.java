@@ -17,7 +17,7 @@ public class MainJFrameForm {
     public MainJFrameForm() {
         showSystemInfoButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent evt) {
                 // TODO add your handling code here:
                 String systemName = "";
                 systemName = comboBox1.getSelectedItem().toString();
@@ -27,8 +27,6 @@ public class MainJFrameForm {
                     showSystemInfoLabel.setText("<html>System's Name: Ctags <br> Programming Language: C <br> Last Revision Number: 774</html>");
                 else if(systemName == "Brlcad")
                     showSystemInfoLabel.setText("<html>System's Name: Brlcad <br> Programming Language: C <br> Last Revision Number: 735</html>");
-                else if(systemName == "MonoOSC")
-                    showSystemInfoLabel.setText("<html>System's Name: MonoOSC <br> Programming Language: C# <br> Last Revision Number: 315</html>");
                 else if(systemName == "Freecol")
                     showSystemInfoLabel.setText("<html>System's Name: Freecol <br> Programming Language: Java <br> Last Revision Number: 1950</html>");
                 else if(systemName == "Carol")
@@ -37,6 +35,34 @@ public class MainJFrameForm {
                     showSystemInfoLabel.setText("<html>System's Name: Jabref <br> Programming Language: Java <br> Last Revision Number: 1545</html>");
                 else
                     showSystemInfoLabel.setText("<html>Please select a valid subject system!</html>");
+            }
+        });
+        percentageOfCloneFragmentsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                // TODO add your handling code here:
+                try {
+                    String systemName = "";
+                    systemName = comboBox1.getSelectedItem().toString();
+                    //System.out.println("System selected in ComboBox: " + systemName);
+
+                    InputParameters ip = new InputParameters();
+                    ip.setParameters(systemName);
+
+                    BugReplicationMicroRegularClones brm = new BugReplicationMicroRegularClones();
+
+                    brm.bugReplication();
+
+                    //System.out.println("---------------------------------------Regular Clone Analysis Starts Here--------------------------------------------\n");
+                    //brm.bugReplicationR();
+
+                    //System.out.println("-----------------------------------------Micro Clone Analysis Starts Here--------------------------------------------\n");
+                    //brm.bugReplicationM();
+
+                }catch(Exception e){
+                    System.out.println("error in jButton2ActionPerformed(RQ1): " + e);
+                    e.printStackTrace();
+                }
             }
         });
     }

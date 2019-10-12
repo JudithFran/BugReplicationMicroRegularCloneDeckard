@@ -1,9 +1,14 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+
 /**
  *
  * @author Judith
  */
 public class InputParameters {
-    public static String systemName = "", pathRegular = "", pathMicro = "", programmingLanguage = "";
+    public static String systemName = "", path = "", pathRegular = "", pathMicro = "", programmingLanguage = "";
     public static int lastRevision;
 
     public void setParameters(String sysName){
@@ -13,43 +18,31 @@ public class InputParameters {
             if(sysName.equals("Ctags")){
                 systemName = sysName;
                 lastRevision = 774;
-                pathRegular = "C:/RegularClones/Ctags/Repository/version-";
-                pathMicro = "C:/MicroClones/Systems/Ctags/Repository/version-";
+                path = "F:/Deckard_Clones/Ctags/Repository/version-";
                 programmingLanguage = "C";
             }
             else if(sysName.equals("Brlcad")){
                 systemName = sysName;
                 lastRevision = 735;
-                pathRegular = "C:/RegularClones/Brlcad/Repository/version-";
-                pathMicro = "C:/MicroClones/Systems/Brlcad/Repository/version-";
+                path = "F:/Deckard_Clones/Brlcad/Repository/version-";
                 programmingLanguage = "C";
-            }
-            else if(sysName.equals("MonoOSC")){
-                systemName = sysName;
-                lastRevision = 315;
-                pathRegular = "C:/RegularClones/Monoosc/Repository/version-";
-                pathMicro = "C:/MicroClones/Systems/Monoosc/Repository/version-";
-                programmingLanguage = "C#";
             }
             else if(sysName.equals("Freecol")){
                 systemName = sysName;
                 lastRevision = 1950;
-                pathRegular = "C:/RegularClones/Freecol/Repository/version-";
-                pathMicro = "C:/MicroClones/Systems/Freecol/Repository/version-";
+                path = "F:/Deckard_Clones/Freecol/Repository/version-";
                 programmingLanguage = "Java";
             }
             else if(sysName.equals("Carol")){
                 systemName = sysName;
                 lastRevision = 1700;
-                pathRegular = "C:/RegularClones/Carol/Repository/version-";
-                pathMicro = "C:/MicroClones/Systems/Carol/Repository/version-";
+                path = "F:/Deckard_Clones/Carol/Repository/version-";
                 programmingLanguage = "Java";
             }
             else if(sysName.equals("Jabref")){
                 systemName = sysName;
                 lastRevision = 1545;
-                pathRegular = "C:/RegularClones/Jabref/Repository/version-";
-                pathMicro = "C:/MicroClones/Systems/Jabref/Repository/version-";
+                path = "F:/Deckard_Clones/Jabref/Repository/version-";
                 programmingLanguage = "Java";
             }
             else if(sysName.equals("Select")){
@@ -58,7 +51,7 @@ public class InputParameters {
             }
 
             if(flag == 0)
-                System.out.println("This is inside setParameters systemName = " + systemName + " Programming language = " + programmingLanguage + " Regular path = " + pathRegular
+                System.out.println("This is inside setParameters systemName = " + systemName + " Programming language = " + programmingLanguage + " Path = " + path + " Regular path = " + pathRegular
                         + " Micro path = " + pathMicro + " Last revision = " + lastRevision);
 
         }catch(Exception e){
@@ -75,4 +68,32 @@ public class InputParameters {
             e.printStackTrace();
         }
     }
+
+    public void IdentifyingRegularMicroClones(int rev){
+        // The purpose of this method is to take the output file of Deckard as input and separate regular and micro clones and then save it in two separate files.
+
+        try {
+            File file = new File(InputParameters.path + rev + "/clusters/cluster_vdb_30_5_allg_0.95_30"); //All Type
+
+            if (file.exists()) {
+
+                BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(InputParameters.path + rev + "/clusters/cluster_vdb_30_5_allg_0.95_30"))); // All Type
+
+                String str = "";
+                String[] str1 = new String[100];
+                int i = 0;
+
+                while((str = br.readLine()) != null){
+                    str1[i] = str.split(" ")[3].trim();
+                    i++;
+                }
+            }
+        }catch (Exception e){
+            System.out.println("Error in method IdentifyingRegularMicroClones" + e);
+            e.printStackTrace();
+        }
+
+
+    }
+
 }
