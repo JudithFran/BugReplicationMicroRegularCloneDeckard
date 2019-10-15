@@ -85,6 +85,7 @@ public class InputParameters {
 
                 while((str = br.readLine()) != null){
                     str1[i] = str.split(" ")[3].trim();
+                    System.out.println("str1 = " + str1[i]);
                     i++;
                 }
             }
