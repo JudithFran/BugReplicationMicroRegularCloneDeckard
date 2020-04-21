@@ -1,0 +1,26 @@
+Output for all clones:
+----------------------
+
+Total distinct number of replicated bugs in regular code clone = 216
+
+Total distinct number of replicated bug revision in regular code clone = 43
+
+Distinct number of replicated bugs in regular clones per revision = 5.023256
+
+Output for Regular clones only:
+-------------------------------
+
+Total distinct number of replicated bugs in regular code clone = 194
+
+Total distinct number of replicated bug revision in regular code clone = 41
+
+Distinct number of replicated bugs in regular clones per revision = 4.731707
+
+Output for Micro clones only:
+-----------------------------
+
+Total number of distinct clone fragments that experienced bug-replication in Regular clones = 194
+Total number of distinct clone fragments that experienced bug-replication in Micro clones = 14
+Total number of distinct revisions that experienced bug-replication in both Regular and Micro clones = 43
+Distinct percentage of replicated bugs in regular clones per revision = 4.5116277
+Distinct percentage of replicated bugs in micro clones per revision = 0.3255814
