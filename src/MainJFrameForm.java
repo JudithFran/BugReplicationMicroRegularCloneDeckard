@@ -40,7 +40,7 @@ public class MainJFrameForm {
         percentageOfCloneFragmentsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                // TODO add your handling code here:
+                // TODO add your handling code here: *************************************RQ1********************************************
                 try {
                     String systemName = "";
                     systemName = comboBox1.getSelectedItem().toString();
@@ -60,7 +60,77 @@ public class MainJFrameForm {
                     //brm.bugReplicationM();
 
                 }catch(Exception e){
-                    System.out.println("error in jButton2ActionPerformed(RQ1): " + e);
+                    System.out.println("Error in percentageOfCloneFragmentsButton(RQ1): " + e);
+                    e.printStackTrace();
+                }
+            }
+        });
+        extentOfBugReplicationButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                try{
+                    // TODO add your handling code here: ******************************************RQ2*************************************************
+                    String systemName = "";
+                    systemName = comboBox1.getSelectedItem().toString();
+                    //System.out.println("System selected in ComboBox: " + systemName);
+
+                    InputParameters ip = new InputParameters();
+                    ip.setParameters(systemName);
+
+                    BugReplicationMicroRegularClones brm = new BugReplicationMicroRegularClones();
+
+                    brm.bugReplicationRQ2();
+
+                }catch(Exception e){
+                    System.out.println("Error in extentOfBugReplicationButton(RQ2): " + e);
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        percentageOfReplicatedBugsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                // TODO add your handling code here: *****************************************************RQ3**************************************************************
+                try{
+                    String systemName = "";
+                    systemName = comboBox1.getSelectedItem().toString();
+                    //System.out.println("System selected in ComboBox: " + systemName);
+
+                    InputParameters ip = new InputParameters();
+                    ip.setParameters(systemName);
+
+                    BugReplicationMicroRegularClones brm = new BugReplicationMicroRegularClones();
+
+                    brm.bugReplicationRQ3();
+
+
+                }catch(Exception e){
+                    System.out.println("Error in percentageOfReplicatedBugsButton (RQ3): " + e);
+                    e.printStackTrace();
+                }
+            }
+        });
+        percentageOfSevereReplicatedButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                // TODO add your handling code here:
+                try{
+                    String systemName = "";
+                    systemName = comboBox1.getSelectedItem().toString();
+                    //System.out.println("System selected in ComboBox: " + systemName);
+
+                    InputParameters ip = new InputParameters();
+                    ip.setParameters(systemName);
+
+                    BugReplicationMicroRegularClones brm = new BugReplicationMicroRegularClones();
+
+                    brm.bugReplicationRQ4();
+
+                    brm.bugReplication();
+
+                }catch(Exception e){
+                    System.out.println("Error in percentageOfSevereReplicatedButton (RQ4): " + e);
                     e.printStackTrace();
                 }
             }
