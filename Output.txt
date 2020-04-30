@@ -1,5 +1,10 @@
+********************************************************RQ1*********************************************************
+
+
 Output for all clones:
 ----------------------
+
+Deckard:
 
 Total distinct number of replicated bugs in regular code clone = 216
 
@@ -10,6 +15,18 @@ Distinct number of replicated bugs in regular clones per revision = 5.023256
 Output for Regular clones only:
 -------------------------------
 
+NiCad:
+
+Total distinct number of replicated bugs in regular code clone = 33
+
+Total distinct number of replicated bug revision in regular code clone = 11
+
+Distinct number of replicated bugs in regular clones per revision = 3.0
+
+--------------------------------------------------------------------------------
+
+Deckard:
+
 Total distinct number of replicated bugs in regular code clone = 194
 
 Total distinct number of replicated bug revision in regular code clone = 41
@@ -19,8 +36,145 @@ Distinct number of replicated bugs in regular clones per revision = 4.731707
 Output for Micro clones only:
 -----------------------------
 
+NiCad:
+
+Total number of distinct clone fragments that experienced bug-replication in Regular clones = 33
+Total number of distinct clone fragments that experienced bug-replication in Micro clones = 36
+Total number of distinct revisions that experienced bug-replication in both Regular and Micro clones = 20
+Distinct percentage of replicated bugs in regular clones per revision = 1.65
+Distinct percentage of replicated bugs in micro clones per revision = 1.8
+
+------------------------------------------------------------------------------------------------------------
+
+Deckard:
+
 Total number of distinct clone fragments that experienced bug-replication in Regular clones = 194
 Total number of distinct clone fragments that experienced bug-replication in Micro clones = 14
 Total number of distinct revisions that experienced bug-replication in both Regular and Micro clones = 43
 Distinct percentage of replicated bugs in regular clones per revision = 4.5116277
 Distinct percentage of replicated bugs in micro clones per revision = 0.3255814
+
+********************************************************RQ2*********************************************************
+
+Regular Clones:
+---------------
+
+NiCad:
+
+Total distinct number of replicated bugs in regular code clone = 33
+
+Total distinct number of replicated bug revision in regular code clone = 11
+
+Distinct number of replicated bugs in regular clones per revision = 3.0
+
+----------------------------------------------------------------------------------------------------------------
+
+Deckard:
+
+Total distinct number of replicated bugs in regular code clone = 194
+
+Total distinct number of replicated bug revision in regular code clone = 41
+
+Distinct number of replicated bugs in regular clones per revision = 4.731707
+
+Micro Clones:
+-------------
+
+NiCad:
+
+Total distinct number of replicated bugs in micro code clone = 36
+
+Total distinct number of replicated bug revision in micro code clone = 13
+
+Distinct number of replicated bugs in micro clones per revision = 2.7692308
+
+------------------------------------------------------------------------------------------------------------------
+
+Deckard:
+
+Total distinct number of replicated bugs in micro code clone = 14
+
+Total distinct number of replicated bug revision in micro code clone = 5
+
+Distinct number of replicated bugs in micro clones per revision = 2.8
+
+********************************************************RQ3*********************************************************
+
+Regular Clones:
+---------------
+
+NiCad:
+
+Total Number of Distinct Bugs(revision) of code clones for Regular = 42
+Total Distinct Number of Replicated Bug Revision in Regular code clone = 41
+Percentage of Replicated Bugs in Regular code clones = 97.61904%
+
+----------------------------------------------------------------------------------------------------------------
+
+Deckard:
+
+Total Number of Distinct Bugs(revision) of code clones for Regular = 11
+Total Distinct Number of Replicated Bug Revision in Regular code clone = 11
+Percentage of Replicated Bugs in Regular code clones = 100.0%
+
+Micro Clones:
+-------------
+
+NiCad:
+
+Total Number of Distinct Bugs(revision) of code clones for Micro = 14
+Total Distinct Number of Replicated Bug Revision in Micro code clone = 13
+Percentage of Replicated Bugs in Micro code clones = 92.85714%
+
+------------------------------------------------------------------------------------------------------------------
+
+Deckard:
+
+Total Number of Distinct Bugs(revision) of code clones for Micro = 5
+Total Distinct Number of Replicated Bug Revision in Micro code clone = 5
+Percentage of Replicated Bugs in Micro code clones = 100.0%
+
+********************************************************RQ4*********************************************************
+
+Regular Clones:
+---------------
+
+NiCad:
+
+Total distinct number of replicated bugs in regular code clone = 8
+
+Total distinct number of replicated bug revision in regular code clone = 3
+
+Distinct number of replicated bugs in regular clones per revision = 2.6666667
+
+----------------------------------------------------------------------------------------------------------------
+
+Deckard:
+
+Total distinct number of replicated bugs in regular code clone = 25
+
+Total distinct number of replicated bug revision in regular code clone = 6
+
+Distinct number of replicated bugs in regular clones per revision = 4.1666665
+
+Micro Clones:
+-------------
+
+NiCad:
+
+Total number of distinct clone fragments that experienced bug-replication in Regular clones = 8
+Total number of distinct clone fragments that experienced bug-replication in Micro clones = 7
+Total number of distinct revisions that experienced bug-replication in both Regular and Micro clones = 4
+Distinct percentage of replicated bugs in regular clones per revision = 2.0
+Distinct percentage of replicated bugs in micro clones per revision = 1.75
+
+------------------------------------------------------------------------------------------------------------------
+
+Deckard:
+
+Total number of distinct clone fragments that experienced bug-replication in Regular clones = 25
+Total number of distinct clone fragments that experienced bug-replication in Micro clones = 7
+Total number of distinct revisions that experienced bug-replication in both Regular and Micro clones = 6
+Distinct percentage of replicated bugs in regular clones per revision = 4.1666665
+Distinct percentage of replicated bugs in micro clones per revision = 1.1666666
+
