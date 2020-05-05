@@ -1,0 +1,120 @@
+********************************************************RQ1*********************************************************
+
+Regular clones:
+---------------
+
+NiCad:
+
+Total distinct number of replicated bugs in regular code clone = 547
+
+Total distinct number of replicated bug revision in regular code clone = 64
+
+Distinct number of replicated bugs in regular clones per revision = 8.546875
+
+--------------------------------------------------------------------------------
+
+Deckard:
+
+
+
+Micro clones:
+-------------
+
+NiCad:
+
+Total number of distinct clone fragments that experienced bug-replication in Regular clones = 547
+Total number of distinct clone fragments that experienced bug-replication in Micro clones = 806
+Total number of distinct revisions that experienced bug-replication in both Regular and Micro clones = 98
+Distinct percentage of replicated bugs in regular clones per revision = 5.5816326
+Distinct percentage of replicated bugs in micro clones per revision = 8.22449
+
+------------------------------------------------------------------------------------------------------------
+
+Deckard:
+
+
+
+********************************************************RQ2*********************************************************
+
+Regular Clones:
+---------------
+
+NiCad:
+
+
+
+----------------------------------------------------------------------------------------------------------------
+
+Deckard:
+
+
+
+Micro Clones:
+-------------
+
+NiCad:
+
+
+
+------------------------------------------------------------------------------------------------------------------
+
+Deckard:
+
+
+
+********************************************************RQ3*********************************************************
+
+Regular Clones:
+---------------
+
+NiCad:
+
+
+
+----------------------------------------------------------------------------------------------------------------
+
+Deckard:
+
+
+
+Micro Clones:
+-------------
+
+NiCad:
+
+
+
+------------------------------------------------------------------------------------------------------------------
+
+Deckard:
+
+
+
+********************************************************RQ4*********************************************************
+
+Regular Clones:
+---------------
+
+NiCad:
+
+
+
+----------------------------------------------------------------------------------------------------------------
+
+Deckard:
+
+
+
+Micro Clones:
+-------------
+
+NiCad:
+
+
+
+------------------------------------------------------------------------------------------------------------------
+
+Deckard:
+
+
+

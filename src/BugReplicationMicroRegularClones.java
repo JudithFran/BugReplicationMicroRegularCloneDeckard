@@ -187,8 +187,6 @@ public class BugReplicationMicroRegularClones {
         String bugFixCommits = "";
         try {
             BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(InputParameters.systemName + " commitlog.txt")));
-            //BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("brlcad commitlog.txt"))); // Have to make it variable
-            //BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("ctags commitlog.txt"))); // Have to make it variable
 
             String str = "";
             String prevString = "";
@@ -232,8 +230,6 @@ public class BugReplicationMicroRegularClones {
         String bugFixCommits = "";
         try {
             BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(InputParameters.systemName + " commitlog.txt")));
-            //BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("brlcad commitlog.txt"))); // Have to make it variable
-            //BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("ctags commitlog.txt"))); // Have to make it variable
 
             String str = "";
             String prevString = "";
@@ -372,6 +368,8 @@ public class BugReplicationMicroRegularClones {
                                 + " Endline = " + changedBugFixCommits2D[i][j].endline + " Changetype = " + changedBugFixCommits2D[i][j].changetype);
                         count++;
                     }
+                    else
+                        break;
                 }
             }
             System.out.println("Total number of changed bug-fix code fragments (CF) = " + count);
@@ -533,8 +531,8 @@ public class BugReplicationMicroRegularClones {
     }
 
     public int getCloneNumber(CodeFragment cf) {
-        // In this method I use cfFile (a two dimensional array) to store each xml file. In first dimension it will store the class number (classID)
-        // and in second dimension it will store each clone fragments (nclones in source tags).
+        // In this method I use cfFile (a two dimensional array) to store each clone file (Deckard clone output file). In first dimension it will store the class number (classID)
+        // and in second dimension it will store each clone fragments.
         CodeFragment[][] cfFile = new CodeFragment[1000][1000];
         int numClones = 0;
         try{
@@ -563,8 +561,8 @@ public class BugReplicationMicroRegularClones {
     }
 
     public int getCloneNumberMicro(CodeFragment cf) {
-        // In this method I use cfFile (a two dimensional array) to store each xml file. In first dimension it will store the class number (classID)
-        // and in second dimension it will store each clone fragments (nclones in source tags).
+        // In this method I use cfFile (a two dimensional array) to store each clone file (Deckard clone output file). In first dimension it will store the class number (classID)
+        // and in second dimension it will store each clone fragments.
         CodeFragment[][] cfFile = new CodeFragment[1000][1000];
         int numClones = 0;
         try{
@@ -649,6 +647,8 @@ public class BugReplicationMicroRegularClones {
                         if(cloneFragmentPair[i][j] != null)
                             System.out.println("bugReplicationR: cfp["+i+"]["+j+"].revision = " + cloneFragmentPair[i][j].revision + " Filepath = " + cloneFragmentPair[i][j].filepath
                                     + " Startline = " + cloneFragmentPair[i][j].startline + " Endline = " + cloneFragmentPair[i][j].endline);
+                        else
+                            break;
 
             // For RQ3
             int countRevision = 1;
@@ -750,6 +750,9 @@ public class BugReplicationMicroRegularClones {
                         if(cloneFragmentPair[i][j] != null)
                             System.out.println("bugReplicationM: After excluding cloneFragmentPair["+i+"]["+j+"].revision = " + cloneFragmentPair[i][j].revision + " Filepath = "
                                     + cloneFragmentPair[i][j].filepath + " Startline = " + cloneFragmentPair[i][j].startline + " Endline = " + cloneFragmentPair[i][j].endline);
+                        else
+                            break;
+
 
             // For RQ3
             int countRevision = 1;
@@ -885,12 +888,20 @@ public class BugReplicationMicroRegularClones {
                                         }
                                     }
                                 }
+                                else
+                                    break;
                             }
+                            if (cfFile[m][0] == null)
+                                break;
                         }
 
 
                     }
+                    else
+                        break;
                 }
+                if(changedBugFixCommits[i][0] == null)
+                    break;
             }
             int len = 0;
             for(x = 0; cfFileMatch[x] != null; x++){
@@ -974,7 +985,7 @@ public class BugReplicationMicroRegularClones {
                         cfXmlFileMicro = fileReadMicro(changedBugFixCommits[i][j].revision);
                         //System.out.println("");
 
-                        // Looping through the xml file of each revision
+                        // Looping through the each clone file (Deckard clone output file) of each revision
                         for (int m = 0; m < cfXmlFileMicro.length; m++) {
                             for (int n = 0; n < cfXmlFileMicro.length; n++) {
 
@@ -1004,12 +1015,20 @@ public class BugReplicationMicroRegularClones {
                                         }
                                     }
                                 }
+                                else
+                                    break;
                             }
+                            if (cfXmlFileMicro[m][0] == null)
+                                break;
                         }
 
 
                     }
+                    else
+                        break;
                 }
+                if(changedBugFixCommits[i][0] == null)
+                    break;
             }
             int len = 0;
             for(x = 0; cfXmlFileMatch[x] != null; x++){
@@ -1074,6 +1093,8 @@ public class BugReplicationMicroRegularClones {
                         if(cfpMicro[i][j] != null)
                             System.out.println("isClonePairMicro: Before excluding cfpMicro["+i+"]["+j+"].revision = " + cfpMicro[i][j].revision + " Filepath = "
                                     + cfpMicro[i][j].filepath + " Startline = " + cfpMicro[i][j].startline + " Endline = " + cfpMicro[i][j].endline);
+                        else
+                            break;
 
             // Eliminating micro-clone pairs which reside in regular clone pairs****************************IMPORTANT**********************************************
             for(int i = 0; cfpMicro[i][0] != null; i++){
@@ -1127,12 +1148,12 @@ public class BugReplicationMicroRegularClones {
 
     public CodeFragment[][] fileRead(int rev){
 
-        // In this method I use cfFile (a two dimensional array) to store each output file. In first dimension it will store the class number (classID)
-        // and in second dimension it will store each clone fragments (nclones in source tags).
-        CodeFragment[][] cfFile = new CodeFragment[5000][5000];
+        // In this method I use cfFile (a two dimensional array) to store each clone file (Deckard clone output file). In first dimension it will store the class number (classID)
+        // and in second dimension it will store each clone fragments.
+        CodeFragment[][] cfFile = new CodeFragment[10000][5000];
         try{
-            String[] store = new String[10000];
-            String[][] store2D = new String[5000][5000];
+            String[] store = new String[50000];
+            String[][] store2D = new String[10000][10000];
 
             File regularFile = new File(InputParameters.path + rev + "/clusters/cluster_vdb_30_5_allg_0.95_30"); //All Type
 
@@ -1152,13 +1173,15 @@ public class BugReplicationMicroRegularClones {
                 for(i = 0; i<store.length ; i++)
                     if(store[i] != null)
                         System.out.println("store[" + i + "] = " + store[i]);
+                    else
+                        break;
                 */
                 int m = 0;
                 int n = 0;
                 int flag = 0;
 
                 for (i = 0; i < store.length; i++)
-                    if (store[i] != null)
+                    if (store[i] != null){
                         if (!store[i].isEmpty()) {
                             flag = 1;
                             store2D[m][n] = store[i];
@@ -1168,15 +1191,19 @@ public class BugReplicationMicroRegularClones {
                             n = 0;
                             flag = 0;
                         }
-
+                    }
+                    else
+                        break;
                 /*
                 for(i = 0; i<store2D.length ; i++)
                     for(int j = 0; j<store2D.length ; j++)
                         if(store2D[i][j] != null)
                             System.out.println("store2D[" + i + "][" + j + "] = " + store2D[i][j]);
+                        else
+                            break;
                 */
 
-                for (i = 0; i < store2D.length; i++)
+                for (i = 0; i < store2D.length; i++) {
                     for (int j = 0; j < store2D.length; j++)
                         if (store2D[i][j] != null) {
 
@@ -1195,11 +1222,16 @@ public class BugReplicationMicroRegularClones {
                             String cs = store2D[i][j].split("[:]+")[3].trim();
                             int cloneSize = Integer.parseInt(cs.split("[ ]+")[0].trim());
 
-                            if(cloneSize>4) {
+                            if (cloneSize > 4) {
                                 cfFile[i][j].endline = cfFile[i][j].startline + cloneSize;
                                 //System.out.println(" i = " + i + " j = " + j + " cfFile[i][j].endline = " + cfFile[i][j].endline);
                             }
                         }
+                        else
+                            break;
+                    if(store2D[i][0] == null)
+                        break;
+                }
             }
             /*
             for (int m = 0; m < cfFile.length; m++) {
@@ -1208,6 +1240,8 @@ public class BugReplicationMicroRegularClones {
                         System.out.println("cfFile[" + m + "][" + n + "] = " + cfFile[m][n].filepath + " Start Line = " + cfFile[m][n].startline
                                 + " End Line = " + cfFile[m][n].endline);
                     }
+                    else
+                        break;
                 }
             }
             */
@@ -1221,12 +1255,12 @@ public class BugReplicationMicroRegularClones {
 
     public CodeFragment[][] fileReadMicro(int rev){
 
-        // In this method I use cfFile (a two dimensional array) to store each output file. In first dimension it will store the class number (classID)
+        // In this method I use cfFile (a two dimensional array) to store each clone file (Deckard clone output file). In first dimension it will store the class number (classID)
         // and in second dimension it will store each clone fragments.
-        CodeFragment[][] cfFile = new CodeFragment[5000][5000];
+        CodeFragment[][] cfFile = new CodeFragment[10000][5000];
         try{
-            String[] store = new String[10000];
-            String[][] store2D = new String[5000][5000];
+            String[] store = new String[50000];
+            String[][] store2D = new String[10000][10000];
 
             File microFile = new File(InputParameters.path + rev + "/clusters/cluster_vdb_30_5_allg_0.95_30"); //All Type
 
@@ -1246,13 +1280,15 @@ public class BugReplicationMicroRegularClones {
                 for(i = 0; i<store.length ; i++)
                     if(store[i] != null)
                         System.out.println("store[" + i + "] = " + store[i]);
+                    else
+                        break;
                 */
                 int m = 0;
                 int n = 0;
                 int flag = 0;
 
                 for (i = 0; i < store.length; i++)
-                    if (store[i] != null)
+                    if (store[i] != null){
                         if (!store[i].isEmpty()) {
                             flag = 1;
                             store2D[m][n] = store[i];
@@ -1262,15 +1298,19 @@ public class BugReplicationMicroRegularClones {
                             n = 0;
                             flag = 0;
                         }
-
+                    }
+                    else
+                        break;
                 /*
                 for(i = 0; i<store2D.length ; i++)
                     for(int j = 0; j<store2D.length ; j++)
                         if(store2D[i][j] != null)
                             System.out.println("store2D[" + i + "][" + j + "] = " + store2D[i][j]);
+                        else
+                            break;
                 */
 
-                for (i = 0; i < store2D.length; i++)
+                for (i = 0; i < store2D.length; i++) {
                     for (int j = 0; j < store2D.length; j++)
                         if (store2D[i][j] != null) {
 
@@ -1289,11 +1329,16 @@ public class BugReplicationMicroRegularClones {
                             String cs = store2D[i][j].split("[:]+")[3].trim();
                             int cloneSize = Integer.parseInt(cs.split("[ ]+")[0].trim());
 
-                            if(cloneSize<5) {
+                            if (cloneSize < 5) {
                                 cfFile[i][j].endline = cfFile[i][j].startline + cloneSize;
                                 //System.out.println(" i = " + i + " j = " + j + " cfFile[i][j].endline = " + cfFile[i][j].endline);
                             }
                         }
+                        else
+                            break;
+                    if(store2D[i][0] == null)
+                        break;
+                }
             }
             /*
             for (int m = 0; m < cfFile.length; m++) {
@@ -1302,6 +1347,8 @@ public class BugReplicationMicroRegularClones {
                         System.out.println("cfFile[" + m + "][" + n + "] = " + cfFile[m][n].filepath + " Start Line = " + cfFile[m][n].startline
                                 + " End Line = " + cfFile[m][n].endline);
                     }
+                    else
+                        break;
                 }
             }
             */
@@ -1315,7 +1362,7 @@ public class BugReplicationMicroRegularClones {
 
     public int getClassID(CodeFragment cf){
 
-        // In this method I use cfFile (a two dimensional array) to store each clone file. In first dimension it will store the class number (classID)
+        // In this method I use cfFile (a two dimensional array) to store each clone file (Deckard clone output file). In first dimension it will store the class number (classID)
         // and in second dimension it will store each clone fragments.
         CodeFragment[][] cfFile = new CodeFragment[1000][1000];
         int classID;
@@ -1328,15 +1375,16 @@ public class BugReplicationMicroRegularClones {
 
                 cfFile = fileRead(cf.revision);
 
-                for(int i = 0; i < cfFile.length; i++)
-                    for(int j = 0; j < cfFile.length; j++)
-                        if(cfFile[i][j] != null)
-
-                            if (cf.filepath.equals(cfFile[i][j].filepath) && cf.startline == cfFile[i][j].startline && cf.endline == cfFile[i][j].endline){
+                for (int i = 0; i < cfFile.length; i++)
+                    for (int j = 0; j < cfFile.length; j++)
+                        if (cfFile[i][j] != null){
+                            if (cf.filepath.equals(cfFile[i][j].filepath) && cf.startline == cfFile[i][j].startline && cf.endline == cfFile[i][j].endline) {
                                 classID = i;
                                 return classID;
                             }
-
+                        }
+                        else
+                            break;
             }
 
         } catch(Exception e){
