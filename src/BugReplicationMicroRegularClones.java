@@ -533,7 +533,7 @@ public class BugReplicationMicroRegularClones {
     public int getCloneNumber(CodeFragment cf) {
         // In this method I use cfFile (a two dimensional array) to store each clone file (Deckard clone output file). In first dimension it will store the class number (classID)
         // and in second dimension it will store each clone fragments.
-        CodeFragment[][] cfFile = new CodeFragment[1000][1000];
+        CodeFragment[][] cfFile = new CodeFragment[10000][10000];
         int numClones = 0;
         try{
             File file = new File(InputParameters.path + cf.revision + "/clusters/cluster_vdb_30_5_allg_0.95_30"); //All Type
@@ -543,6 +543,8 @@ public class BugReplicationMicroRegularClones {
                 BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file))); // All Type
 
                 cfFile = fileRead(cf.revision);
+
+                System.out.println("****************************************************** cfFile.length = " + cfFile.length + " ******************************************************");
 
                 for(int i = 0; i < cfFile.length; i++) {
                     for (int j = 0; j < cfFile.length; j++)
@@ -563,7 +565,7 @@ public class BugReplicationMicroRegularClones {
     public int getCloneNumberMicro(CodeFragment cf) {
         // In this method I use cfFile (a two dimensional array) to store each clone file (Deckard clone output file). In first dimension it will store the class number (classID)
         // and in second dimension it will store each clone fragments.
-        CodeFragment[][] cfFile = new CodeFragment[1000][1000];
+        CodeFragment[][] cfFile = new CodeFragment[10000][10000];
         int numClones = 0;
         try{
             File file = new File(InputParameters.path + cf.revision + "/clusters/cluster_vdb_30_5_allg_0.95_30"); //All Type
@@ -676,7 +678,7 @@ public class BugReplicationMicroRegularClones {
                     if(cloneFragmentPairINR[0] != null && cloneFragmentPairINR[1] != null){
                         if(isClonePairBinary(cloneFragmentPairINR[0], cloneFragmentPairINR[1]) == 1){
                             numReplicatedBugFixCommits++;
-                            System.out.println("////////////////////////////////////////////////////////////////////////////Replicated Bug Fixing Change Found////////////////////////////////////////////////////////////////////////////");
+                            System.out.println("///////////////////////////////////////////////////////////////////////Replicated Bug Fixing Change Found (Regular)///////////////////////////////////////////////////////////////////////");
                             //System.out.println("numReplicatedBugFixCommits for Regular Clones = " + numReplicatedBugFixCommits);
 
                             bugRep.add(cloneFragmentPair[x][0]);
@@ -778,7 +780,7 @@ public class BugReplicationMicroRegularClones {
                     if(cloneFragmentPairINR[0] != null && cloneFragmentPairINR[1] != null){
                         if(isClonePairBinary(cloneFragmentPairINR[0], cloneFragmentPairINR[1]) == 1){
                             numReplicatedBugFixCommits++;
-                            System.out.println("////////////////////////////////////////////////////////////////////////////Replicated Bug Fixing Change Found////////////////////////////////////////////////////////////////////////////");
+                            System.out.println("////////////////////////////////////////////////////////////////////////Replicated Bug Fixing Change Found (Micro)////////////////////////////////////////////////////////////////////////");
                             System.out.println("numReplicatedBugFixCommits for Micro Clones = " + numReplicatedBugFixCommits);
 
                             bugRep.add(cloneFragmentPair[x][0]);
@@ -874,7 +876,7 @@ public class BugReplicationMicroRegularClones {
                                                 ||((changedBugFixCommits[i][j].startline >= cfFile[m][n].startline) && (changedBugFixCommits[i][j].endline >= cfFile[m][n].endline)
                                                 && (changedBugFixCommits[i][j].startline <= cfFile[m][n].endline))){
 
-                                            System.out.println("*********************************************** File Name matched ***********************************************");
+                                            System.out.println("*********************************************** File Name matched (Regular) ***********************************************");
 
                                             //System.out.println("Matched CF from changedBugFixCommits["+i+"]["+j+"] = " + changedBugFixCommits[i][j].filepath + " Start Line = "
                                             //+ changedBugFixCommits[i][j].startline + " End Line = " + changedBugFixCommits[i][j].endline);
@@ -947,7 +949,7 @@ public class BugReplicationMicroRegularClones {
                         //System.out.println("classID2 in Regular = " + classID2 + "\n");
 
                         if(classID1 == classID2){
-                            System.out.println("********************************************Pair Found********************************************");
+                            System.out.println("********************************************Pair Found (Regular)********************************************");
                             cfp[x][0] = cfFileMatch[i];
                             cfp[x][1] = cfFileMatch[j];
                             x++;
@@ -1001,7 +1003,7 @@ public class BugReplicationMicroRegularClones {
                                                 ||((changedBugFixCommits[i][j].startline >= cfXmlFileMicro[m][n].startline) && (changedBugFixCommits[i][j].endline >= cfXmlFileMicro[m][n].endline)
                                                 && (changedBugFixCommits[i][j].startline <= cfXmlFileMicro[m][n].endline))){
 
-                                            System.out.println("*********************************************** File Name matched ***********************************************");
+                                            System.out.println("*********************************************** File Name matched (Micro) ***********************************************");
 
                                             System.out.println("Matched CF from changedBugFixCommits["+i+"]["+j+"] = " + changedBugFixCommits[i][j].filepath + " Start Line = "
                                                     + changedBugFixCommits[i][j].startline + " End Line = " + changedBugFixCommits[i][j].endline);
@@ -1074,7 +1076,7 @@ public class BugReplicationMicroRegularClones {
                         //System.out.println("classID2 in Micro = " + classID2 + "\n");
 
                         if(classID1 == classID2){
-                            System.out.println("********************************************Pair Found********************************************");
+                            System.out.println("********************************************Pair Found (Micro)********************************************");
                             cfpMicro[x][0] = cfXmlFileMatch[i];
                             cfpMicro[x][1] = cfXmlFileMatch[j];
                             x++;
@@ -1150,7 +1152,7 @@ public class BugReplicationMicroRegularClones {
 
         // In this method I use cfFile (a two dimensional array) to store each clone file (Deckard clone output file). In first dimension it will store the class number (classID)
         // and in second dimension it will store each clone fragments.
-        CodeFragment[][] cfFile = new CodeFragment[10000][5000];
+        CodeFragment[][] cfFile = new CodeFragment[10000][10000];
         try{
             String[] store = new String[50000];
             String[][] store2D = new String[10000][10000];
@@ -1186,7 +1188,8 @@ public class BugReplicationMicroRegularClones {
                             flag = 1;
                             store2D[m][n] = store[i];
                             n++;
-                        } else if (flag == 1) {
+                        }
+                        else if (flag == 1) {
                             m++;
                             n = 0;
                             flag = 0;
@@ -1257,7 +1260,7 @@ public class BugReplicationMicroRegularClones {
 
         // In this method I use cfFile (a two dimensional array) to store each clone file (Deckard clone output file). In first dimension it will store the class number (classID)
         // and in second dimension it will store each clone fragments.
-        CodeFragment[][] cfFile = new CodeFragment[10000][5000];
+        CodeFragment[][] cfFile = new CodeFragment[10000][10000];
         try{
             String[] store = new String[50000];
             String[][] store2D = new String[10000][10000];
@@ -1293,7 +1296,8 @@ public class BugReplicationMicroRegularClones {
                             flag = 1;
                             store2D[m][n] = store[i];
                             n++;
-                        } else if (flag == 1) {
+                        }
+                        else if (flag == 1) {
                             m++;
                             n = 0;
                             flag = 0;
