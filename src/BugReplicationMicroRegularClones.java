@@ -1,7 +1,4 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.ArrayList;
 
 
@@ -78,6 +75,8 @@ class CodeFragment {
 
 
 public class BugReplicationMicroRegularClones {
+
+    CodeFragment[][] cfp = new CodeFragment[50000][2];
 
     DBConnect db = new DBConnect();
     CompareChanges cc = new CompareChanges();
@@ -488,6 +487,14 @@ public class BugReplicationMicroRegularClones {
 
                 System.out.println("At i = " + i + " countRepR = " + countRepR);
                 System.out.println("At i = " + i + " nclonesR = " + nclonesR);
+
+                PrintWriter writer = new PrintWriter("Temp_output.txt", "UTF-8");
+
+                writer.println("At i = " + i + " countRepR = " + countRepR);
+                writer.println("At i = " + i + " nclonesR = " + nclonesR);
+
+                writer.close();
+
                 countRepR++;
             }
 
@@ -542,18 +549,26 @@ public class BugReplicationMicroRegularClones {
 
                 BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file))); // All Type
 
-                cfFile = fileRead(cf.revision);
+                while((br.readLine()) != null) {
+                    cfFile = fileRead(cf.revision);
 
-                System.out.println("****************************************************** cfFile.length = " + cfFile.length + " ******************************************************");
-
-                for(int i = 0; i < cfFile.length; i++) {
-                    for (int j = 0; j < cfFile.length; j++)
-                        if (cfFile[i][j] != null)
-                            if (cf.filepath.equals(cfFile[i][j].filepath) && cf.startline == cfFile[i][j].startline && cf.endline == cfFile[i][j].endline)
+                    int flag = 0;
+                    for (int i = 0; i < cfFile.length; i++) {
+                        for (int j = 0; j < cfFile.length; j++) {
+                            if (cfFile[i][j] != null) {
+                                if (cf.filepath.equals(cfFile[i][j].filepath) && cf.startline == cfFile[i][j].startline && cf.endline == cfFile[i][j].endline) {
+                                    flag = 1;
+                                }
                                 numClones = j;
-                    return numClones;
+                                //System.out.println("The value of variable numClones inside the inner for loop = " + numClones);
+                            }
+                        }
+                        if (flag == 1) {
+                            //System.out.println("The value of variable numClones returned from getCloneNumber = " + numClones);
+                            return numClones+1;
+                        }
+                    }
                 }
-
             }
         }catch(Exception e){
             System.out.println("Error in getCloneNumber: " + e);
@@ -574,16 +589,23 @@ public class BugReplicationMicroRegularClones {
 
                 BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file))); // All Type
 
-                cfFile = fileReadMicro(cf.revision);
+                while((br.readLine()) != null) {
+                    cfFile = fileReadMicro(cf.revision);
 
-                for(int i = 0; i < cfFile.length; i++) {
-                    for (int j = 0; j < cfFile.length; j++)
-                        if (cfFile[i][j] != null)
-                            if (cf.filepath.equals(cfFile[i][j].filepath) && cf.startline == cfFile[i][j].startline && cf.endline == cfFile[i][j].endline)
+                    int flag = 0;
+                    for (int i = 0; i < cfFile.length; i++) {
+                        for (int j = 0; j < cfFile.length; j++) {
+                            if (cfFile[i][j] != null) {
+                                if (cf.filepath.equals(cfFile[i][j].filepath) && cf.startline == cfFile[i][j].startline && cf.endline == cfFile[i][j].endline) {
+                                    flag = 1;
+                                }
                                 numClones = j;
-                    return numClones;
+                            }
+                        }
+                        if (flag == 1)
+                            return numClones+1;
+                    }
                 }
-
             }
         }catch(Exception e){
             System.out.println("Error in getCloneNumberMicro: " + e);
@@ -715,7 +737,7 @@ public class BugReplicationMicroRegularClones {
                 bugRep.get(i).showFragment();
             }
 
-            System.out.println("\nTotal distinct number of replicated bugs in regular code clone = " + bugRep.size());
+            System.out.println("\nTotal distinct number of replicated bugs in regular code clone = " + bugRep.size()); // OUTPUT RESULT
 
             // Counting the distinct number replicated bug in regular clones per revision
             int countRevisionRep = 1;
@@ -724,13 +746,23 @@ public class BugReplicationMicroRegularClones {
                     countRevisionRep++;
 
             // For RQ3
-            System.out.println("\nTotal distinct number of replicated bug revision in regular code clone = " + countRevisionRep);
+            System.out.println("\nTotal distinct number of replicated bug revision in regular code clone = " + countRevisionRep); // OUTPUT RESULT
 
             countRevRepR = countRevisionRep;
 
             float averageCountRegular = (float)bugRep.size()/countRevisionRep;
 
-            System.out.println("\nDistinct number of replicated bugs in regular clones per revision = " + averageCountRegular + "\n");
+            System.out.println("\nDistinct number of replicated bugs in regular clones per revision = " + averageCountRegular + "\n"); // OUTPUT RESULT
+
+            // Saving output result of regular clones to a text file.
+
+            PrintWriter writer = new PrintWriter("Temp_output.txt", "UTF-8");
+
+            writer.println("\nTotal distinct number of replicated bugs in regular code clone = " + bugRep.size());
+            writer.println("\nTotal distinct number of replicated bug revision in regular code clone = " + countRevisionRep);
+            writer.println("\nDistinct number of replicated bugs in regular clones per revision = " + averageCountRegular + "\n");
+
+            writer.close();
 
         }catch(Exception e){
             System.out.println("error in BugReplicationR = " + e);
@@ -843,20 +875,20 @@ public class BugReplicationMicroRegularClones {
     }
 
     public CodeFragment[][] isClonePair(){
-        CodeFragment[][] cfp = new CodeFragment[5000][2];   // was 10000 before optimization
+        //CodeFragment[][] cfp = new CodeFragment[5000][2];   // was 10000 before optimization
         try{
             CodeFragment[][] changedBugFixCommits = new CodeFragment[500][500];   // was 10000 before optimization
             changedBugFixCommits = getChangedBugFixCommits();
 
-            CodeFragment[][] cfFile = new CodeFragment[500][500];
-            CodeFragment[] cfFileMatch = new CodeFragment[5000];
+            CodeFragment[][] cfFile = new CodeFragment[10000][10000];
+            CodeFragment[] cfFileMatch = new CodeFragment[50000];
             int x = 0;
 
             // Looping through the changed bug-fix commit 2D array
             for(int i = 0; i<changedBugFixCommits.length; i++){
                 for(int j = 0; j<changedBugFixCommits.length; j++){
                     if(changedBugFixCommits[i][j] != null){
-                        System.out.println("Revision number = " + changedBugFixCommits[i][j].revision);
+                        //System.out.println("Revision number = " + changedBugFixCommits[i][j].revision);
                         cfFile = fileRead(changedBugFixCommits[i][j].revision);
 
 
@@ -877,6 +909,7 @@ public class BugReplicationMicroRegularClones {
                                                 && (changedBugFixCommits[i][j].startline <= cfFile[m][n].endline))){
 
                                             System.out.println("*********************************************** File Name matched (Regular) ***********************************************");
+                                            System.out.println("Revision number = " + changedBugFixCommits[i][j].revision);
 
                                             //System.out.println("Matched CF from changedBugFixCommits["+i+"]["+j+"] = " + changedBugFixCommits[i][j].filepath + " Start Line = "
                                             //+ changedBugFixCommits[i][j].startline + " End Line = " + changedBugFixCommits[i][j].endline);
@@ -940,7 +973,7 @@ public class BugReplicationMicroRegularClones {
             for(int i = 0; cfFileMatch[i] != null; i++){
                 for(int j = i+1; cfFileMatch[j] != null; j++){
                     if(cfFileMatch[i].revision == cfFileMatch[j].revision){
-                        System.out.println("Revision = " + cfFileMatch[i].revision);
+                        //System.out.println("Revision = " + cfFileMatch[i].revision);
 
                         classID1 = getClassID(cfFileMatch[i]);
                         //System.out.println("classID1 in Regular = " + classID1);
@@ -950,6 +983,7 @@ public class BugReplicationMicroRegularClones {
 
                         if(classID1 == classID2){
                             System.out.println("********************************************Pair Found (Regular)********************************************");
+                            System.out.println("Revision number = " + cfFileMatch[i].revision);
                             cfp[x][0] = cfFileMatch[i];
                             cfp[x][1] = cfFileMatch[j];
                             x++;
@@ -975,7 +1009,7 @@ public class BugReplicationMicroRegularClones {
 
             CodeFragment[] cfXmlFileMatch = new CodeFragment[10000];    // was 50000 before optimization
 
-            CodeFragment[][] cfpReg = new CodeFragment[10000][2];   // was 50000 before optimization
+            //CodeFragment[][] cfpReg = new CodeFragment[10000][2];   // was 50000 before optimization
 
             int x = 0;
 
@@ -983,7 +1017,7 @@ public class BugReplicationMicroRegularClones {
             for(int i = 0; i<changedBugFixCommits.length; i++){
                 for(int j = 0; j<changedBugFixCommits.length; j++){
                     if(changedBugFixCommits[i][j] != null){
-                        System.out.println("Revision number = " + changedBugFixCommits[i][j].revision);
+                        //System.out.println("Revision number = " + changedBugFixCommits[i][j].revision);
                         cfXmlFileMicro = fileReadMicro(changedBugFixCommits[i][j].revision);
                         //System.out.println("");
 
@@ -1004,6 +1038,7 @@ public class BugReplicationMicroRegularClones {
                                                 && (changedBugFixCommits[i][j].startline <= cfXmlFileMicro[m][n].endline))){
 
                                             System.out.println("*********************************************** File Name matched (Micro) ***********************************************");
+                                            System.out.println("Revision number = " + changedBugFixCommits[i][j].revision);
 
                                             System.out.println("Matched CF from changedBugFixCommits["+i+"]["+j+"] = " + changedBugFixCommits[i][j].filepath + " Start Line = "
                                                     + changedBugFixCommits[i][j].startline + " End Line = " + changedBugFixCommits[i][j].endline);
@@ -1067,7 +1102,7 @@ public class BugReplicationMicroRegularClones {
             for(int i = 0; cfXmlFileMatch[i] != null; i++){
                 for(int j = i+1; cfXmlFileMatch[j] != null; j++){
                     if(cfXmlFileMatch[i].revision == cfXmlFileMatch[j].revision){
-                        System.out.println("Revision = " + cfXmlFileMatch[i].revision);
+                        //System.out.println("Revision = " + cfXmlFileMatch[i].revision);
 
                         classID1 = getClassID(cfXmlFileMatch[i]);
                         //System.out.println("classID1 in Micro = " + classID1);
@@ -1077,17 +1112,19 @@ public class BugReplicationMicroRegularClones {
 
                         if(classID1 == classID2){
                             System.out.println("********************************************Pair Found (Micro)********************************************");
+                            System.out.println("Revision number = " + cfXmlFileMatch[i].revision);
+
                             cfpMicro[x][0] = cfXmlFileMatch[i];
                             cfpMicro[x][1] = cfXmlFileMatch[j];
                             x++;
-                            System.out.println("x = " + x);
+                            //System.out.println("x = " + x);
                         }
 
                     }
                 }
             }
 
-            cfpReg = isClonePair();
+            //cfpReg = isClonePair();
 
             if(cfpMicro != null)
                 for (int i = 0; i < cfpMicro.length; i++)
@@ -1100,37 +1137,37 @@ public class BugReplicationMicroRegularClones {
 
             // Eliminating micro-clone pairs which reside in regular clone pairs****************************IMPORTANT**********************************************
             for(int i = 0; cfpMicro[i][0] != null; i++){
-                for(int j = 0; cfpReg[j][0] != null; j++){
-                    if(cfpMicro[i][0].filepath.equals(cfpReg[j][0].filepath) && cfpMicro[i][1].filepath.equals(cfpReg[j][1].filepath)){
-                        if( (cfpMicro[i][0].startline >= cfpReg[j][0].startline && cfpMicro[i][0].endline <= cfpReg[j][0].endline)
-                                &&(cfpMicro[i][1].startline >= cfpReg[j][1].startline && cfpMicro[i][1].endline <= cfpReg[j][1].endline) ){
+                for(int j = 0; cfp[j][0] != null; j++){
+                    if(cfpMicro[i][0].filepath.equals(cfp[j][0].filepath) && cfpMicro[i][1].filepath.equals(cfp[j][1].filepath)){
+                        if( (cfpMicro[i][0].startline >= cfp[j][0].startline && cfpMicro[i][0].endline <= cfp[j][0].endline)
+                                &&(cfpMicro[i][1].startline >= cfp[j][1].startline && cfpMicro[i][1].endline <= cfp[j][1].endline) ){
 
                             System.out.println("isClonePairMicro: Deleted Pair cfpMicro["+i+"][0].revision = " + cfpMicro[i][0].revision + " Filepath = "
                                     + cfpMicro[i][0].filepath + " Startline = " + cfpMicro[i][0].startline + " Endline = " + cfpMicro[i][0].endline);
-                            System.out.println("isClonePairMicro: Deleted Pair cfpReg["+j+"][0].revision = " + cfpReg[j][0].revision + " Filepath = "
-                                    + cfpReg[j][0].filepath + " Startline = " + cfpReg[j][0].startline + " Endline = " + cfpReg[j][0].endline);
+                            System.out.println("isClonePairMicro: Deleted Pair cfpReg["+j+"][0].revision = " + cfp[j][0].revision + " Filepath = "
+                                    + cfp[j][0].filepath + " Startline = " + cfp[j][0].startline + " Endline = " + cfp[j][0].endline);
                             System.out.println("isClonePairMicro: Deleted Pair cfpMicro["+i+"][1].revision = " + cfpMicro[i][1].revision + " Filepath = "
                                     + cfpMicro[i][1].filepath + " Startline = " + cfpMicro[i][1].startline + " Endline = " + cfpMicro[i][1].endline);
-                            System.out.println("isClonePairMicro: Deleted Pair cfpReg["+j+"][1].revision = " + cfpReg[j][1].revision + " Filepath = "
-                                    + cfpReg[j][1].filepath + " Startline = " + cfpReg[j][1].startline + " Endline = " + cfpReg[j][1].endline);
+                            System.out.println("isClonePairMicro: Deleted Pair cfpReg["+j+"][1].revision = " + cfp[j][1].revision + " Filepath = "
+                                    + cfp[j][1].filepath + " Startline = " + cfp[j][1].startline + " Endline = " + cfp[j][1].endline);
                             for(x = i; cfpMicro[x][0] != null; x++){
                                 cfpMicro[x][0] = cfpMicro[x+1][0];
                                 cfpMicro[x][1] = cfpMicro[x+1][1];
                             }
                         }
                     }
-                    else if(cfpMicro[i][0].filepath.equals(cfpReg[j][1].filepath) && cfpMicro[i][1].filepath.equals(cfpReg[j][0].filepath)){
-                        if( (cfpMicro[i][0].startline >= cfpReg[j][1].startline && cfpMicro[i][0].endline <= cfpReg[j][1].endline)
-                                &&(cfpMicro[i][1].startline >= cfpReg[j][0].startline && cfpMicro[i][1].endline <= cfpReg[j][0].endline) ){
+                    else if(cfpMicro[i][0].filepath.equals(cfp[j][1].filepath) && cfpMicro[i][1].filepath.equals(cfp[j][0].filepath)){
+                        if( (cfpMicro[i][0].startline >= cfp[j][1].startline && cfpMicro[i][0].endline <= cfp[j][1].endline)
+                                &&(cfpMicro[i][1].startline >= cfp[j][0].startline && cfpMicro[i][1].endline <= cfp[j][0].endline) ){
 
                             System.out.println("isClonePairMicro: Deleted Pair cfpMicro["+i+"][0].revision = " + cfpMicro[i][0].revision + " Filepath = "
                                     + cfpMicro[i][0].filepath + " Startline = " + cfpMicro[i][0].startline + " Endline = " + cfpMicro[i][0].endline);
-                            System.out.println("isClonePairMicro: Deleted Pair cfpReg["+j+"][0].revision = " + cfpReg[j][0].revision + " Filepath = "
-                                    + cfpReg[j][0].filepath + " Startline = " + cfpReg[j][0].startline + " Endline = " + cfpReg[j][0].endline);
+                            System.out.println("isClonePairMicro: Deleted Pair cfpReg["+j+"][0].revision = " + cfp[j][0].revision + " Filepath = "
+                                    + cfp[j][0].filepath + " Startline = " + cfp[j][0].startline + " Endline = " + cfp[j][0].endline);
                             System.out.println("isClonePairMicro: Deleted Pair cfpMicro["+i+"][1].revision = " + cfpMicro[i][1].revision + " Filepath = "
                                     + cfpMicro[i][1].filepath + " Startline = " + cfpMicro[i][1].startline + " Endline = " + cfpMicro[i][1].endline);
-                            System.out.println("isClonePairMicro: Deleted Pair cfpReg["+j+"][1].revision = " + cfpReg[j][1].revision + " Filepath = "
-                                    + cfpReg[j][1].filepath + " Startline = " + cfpReg[j][1].startline + " Endline = " + cfpReg[j][1].endline);
+                            System.out.println("isClonePairMicro: Deleted Pair cfpReg["+j+"][1].revision = " + cfp[j][1].revision + " Filepath = "
+                                    + cfp[j][1].filepath + " Startline = " + cfp[j][1].startline + " Endline = " + cfp[j][1].endline);
 
                             for(x = i; cfpMicro[x][0] != null; x++){
                                 cfpMicro[x][0] = cfpMicro[x+1][0];

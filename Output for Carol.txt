@@ -24,7 +24,11 @@ NiCad:
 
 Deckard:
 
-
+Total number of distinct clone fragments that experienced bug-replication in Regular clones = 0
+Total number of distinct clone fragments that experienced bug-replication in Micro clones = 538
+Total number of distinct revisions that experienced bug-replication in both Regular and Micro clones = 29
+Distinct percentage of replicated bugs in regular clones per revision = 0.0
+Distinct percentage of replicated bugs in micro clones per revision = 18.551723
 
 ********************************************************RQ2*********************************************************
 

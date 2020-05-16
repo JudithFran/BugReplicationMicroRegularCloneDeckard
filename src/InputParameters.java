@@ -67,33 +67,4 @@ public class InputParameters {
             e.printStackTrace();
         }
     }
-
-    public void IdentifyingRegularMicroClones(int rev){
-        // The purpose of this method is to take the output file of Deckard as input and separate regular and micro clones and then save it in two separate files.
-
-        try {
-            File file = new File(InputParameters.path + rev + "/clusters/cluster_vdb_30_5_allg_0.95_30"); //All Type
-
-            if (file.exists()) {
-
-                BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(InputParameters.path + rev + "/clusters/cluster_vdb_30_5_allg_0.95_30"))); // All Type
-
-                String str = "";
-                String[] str1 = new String[100];
-                int i = 0;
-
-                while((str = br.readLine()) != null){
-                    str1[i] = str.split(" ")[3].trim();
-                    System.out.println("str1 = " + str1[i]);
-                    i++;
-                }
-            }
-        }catch (Exception e){
-            System.out.println("Error in method IdentifyingRegularMicroClones" + e);
-            e.printStackTrace();
-        }
-
-
-    }
-
 }

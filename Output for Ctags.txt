@@ -40,7 +40,7 @@ Total number of distinct clone fragments that experienced bug-replication in Reg
 Total number of distinct clone fragments that experienced bug-replication in Micro clones = 19
 Total number of distinct revisions that experienced bug-replication in both Regular and Micro clones = 34
 Distinct percentage of replicated bugs in regular clones per revision = 2.5882354
-Distinct percentage of replicated bugs in micro clones per revision = 0.5588
+Distinct percentage of replicated bugs in micro clones per revision = 0.5588235
 
 ********************************************************RQ2*********************************************************
 
