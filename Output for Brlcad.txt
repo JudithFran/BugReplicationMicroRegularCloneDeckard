@@ -77,6 +77,9 @@ Total distinct number of replicated bug revision in regular code clone = 41
 
 Distinct number of replicated bugs in regular clones per revision = 4.731707
 
+At i = 193 countRepR = 194
+At i = 193 nclonesR = 211
+
 Micro Clones:
 -------------
 
@@ -97,6 +100,9 @@ Total distinct number of replicated bugs in micro code clone = 14
 Total distinct number of replicated bug revision in micro code clone = 5
 
 Distinct number of replicated bugs in micro clones per revision = 2.8
+
+At i = 13 countRepM = 14
+At i = 13 nclonesM = 19
 
 ********************************************************RQ3*********************************************************
 
