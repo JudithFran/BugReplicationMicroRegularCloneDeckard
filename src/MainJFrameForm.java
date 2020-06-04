@@ -42,6 +42,8 @@ public class MainJFrameForm {
             public void actionPerformed(ActionEvent evt) {
                 // TODO add your handling code here: *************************************RQ1********************************************
                 try {
+                    long startTime = System.currentTimeMillis();
+
                     String systemName = "";
                     systemName = comboBox1.getSelectedItem().toString();
                     //System.out.println("System selected in ComboBox: " + systemName);
@@ -59,6 +61,21 @@ public class MainJFrameForm {
                     //System.out.println("-----------------------------------------Micro Clone Analysis Starts Here--------------------------------------------\n");
                     //brm.bugReplicationM();
 
+                    long stopTime = System.currentTimeMillis();
+                    long elapsedTime = stopTime - startTime;
+                    long sTime = (long) (elapsedTime*0.001);
+                    long mTime = sTime/60;
+                    sTime = sTime%60;
+                    long hTime;
+
+                    if(mTime >= 60) {
+                        hTime = mTime/60;
+                        mTime = mTime%60;
+                        System.out.println("Total execution time for RQ1 = " + hTime + " hours " + mTime + " minutes");
+                    }
+                    else
+                        System.out.println("Total execution time for RQ1 = " + mTime + " minutes " + sTime + " seconds");
+
                 }catch(Exception e){
                     System.out.println("Error in percentageOfCloneFragmentsButton(RQ1): " + e);
                     e.printStackTrace();
@@ -68,8 +85,10 @@ public class MainJFrameForm {
         extentOfBugReplicationButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
+                // TODO add your handling code here: ******************************************RQ2*************************************************
                 try{
-                    // TODO add your handling code here: ******************************************RQ2*************************************************
+                    long startTime = System.currentTimeMillis();
+
                     String systemName = "";
                     systemName = comboBox1.getSelectedItem().toString();
                     //System.out.println("System selected in ComboBox: " + systemName);
@@ -80,6 +99,21 @@ public class MainJFrameForm {
                     BugReplicationMicroRegularClones brm = new BugReplicationMicroRegularClones();
 
                     brm.bugReplicationRQ2();
+
+                    long stopTime = System.currentTimeMillis();
+                    long elapsedTime = stopTime - startTime;
+                    long sTime = (long) (elapsedTime*0.001);
+                    long mTime = sTime/60;
+                    sTime = sTime%60;
+                    long hTime;
+
+                    if(mTime >= 60) {
+                        hTime = mTime/60;
+                        mTime = mTime%60;
+                        System.out.println("Total execution time for RQ2 = " + hTime + " hours " + mTime + " minutes");
+                    }
+                    else
+                        System.out.println("Total execution time for RQ2 = " + mTime + " minutes " + sTime + " seconds");
 
                 }catch(Exception e){
                     System.out.println("Error in extentOfBugReplicationButton(RQ2): " + e);
@@ -93,6 +127,7 @@ public class MainJFrameForm {
             public void actionPerformed(ActionEvent evt) {
                 // TODO add your handling code here: *****************************************************RQ3**************************************************************
                 try{
+                    long startTime = System.currentTimeMillis();
                     String systemName = "";
                     systemName = comboBox1.getSelectedItem().toString();
                     //System.out.println("System selected in ComboBox: " + systemName);
@@ -104,7 +139,20 @@ public class MainJFrameForm {
 
                     brm.bugReplicationRQ3();
 
+                    long stopTime = System.currentTimeMillis();
+                    long elapsedTime = stopTime - startTime;
+                    long sTime = (long) (elapsedTime*0.001);
+                    long mTime = sTime/60;
+                    sTime = sTime%60;
+                    long hTime;
 
+                    if(mTime >= 60) {
+                        hTime = mTime/60;
+                        mTime = mTime%60;
+                        System.out.println("Total execution time for RQ3 = " + hTime + " hours " + mTime + " minutes");
+                    }
+                    else
+                        System.out.println("Total execution time for RQ3 = " + mTime + " minutes " + sTime + " seconds");
                 }catch(Exception e){
                     System.out.println("Error in percentageOfReplicatedBugsButton (RQ3): " + e);
                     e.printStackTrace();
@@ -114,8 +162,9 @@ public class MainJFrameForm {
         percentageOfSevereReplicatedButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                // TODO add your handling code here:
+                // TODO add your handling code here: *****************************************************RQ4**************************************************************
                 try{
+                    long startTime = System.currentTimeMillis();
                     String systemName = "";
                     systemName = comboBox1.getSelectedItem().toString();
                     //System.out.println("System selected in ComboBox: " + systemName);
@@ -128,6 +177,21 @@ public class MainJFrameForm {
                     brm.bugReplicationRQ4();
 
                     brm.bugReplication();
+
+                    long stopTime = System.currentTimeMillis();
+                    long elapsedTime = stopTime - startTime;
+                    long sTime = (long) (elapsedTime*0.001);
+                    long mTime = sTime/60;
+                    sTime = sTime%60;
+                    long hTime;
+
+                    if(mTime >= 60) {
+                        hTime = mTime/60;
+                        mTime = mTime%60;
+                        System.out.println("Total execution time for RQ4 = " + hTime + " hours " + mTime + " minutes");
+                    }
+                    else
+                        System.out.println("Total execution time for RQ4 = " + mTime + " minutes " + sTime + " seconds");
 
                 }catch(Exception e){
                     System.out.println("Error in percentageOfSevereReplicatedButton (RQ4): " + e);
