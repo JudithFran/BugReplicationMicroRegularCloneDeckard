@@ -77,6 +77,8 @@ class CodeFragment {
 public class BugReplicationMicroRegularClones {
 
     CodeFragment[][] cfp = new CodeFragment[100000][2];
+    //CodeFragment[][] cfFile1R = new CodeFragment[10000][10000];
+    //CodeFragment[][] cfFile1M = new CodeFragment[10000][10000];
 
     DBConnect db = new DBConnect();
     CompareChanges cc = new CompareChanges();

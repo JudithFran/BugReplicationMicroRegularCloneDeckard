@@ -1,2 +1,7 @@
-At i = 81 countRepR = 82
-At i = 81 nclonesR = 88
+
+Total distinct number of replicated bugs in regular code clone = 1461
+
+Total distinct number of replicated bug revision in regular code clone = 69
+
+Distinct number of replicated bugs in regular clones per revision = 21.173914
+
