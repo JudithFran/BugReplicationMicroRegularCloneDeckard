@@ -1546,7 +1546,6 @@ public class BugReplicationMicroRegularClones {
             e.printStackTrace();
         }
         return 0;
-
     }
 
     public int getClassIDMicro(CodeFragment cf){
